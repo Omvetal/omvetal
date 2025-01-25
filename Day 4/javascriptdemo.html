@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=script, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        document.write("<h1>Javascript is a simple programing language for beginers</h1>");
+        console.log("your script is working");
+        var a=20;
+        if(a>10)
+        {
+            document.write("Value is greator than 10.<br>");
+            console.log("Value compared");
+        }
+        var a=20;
+        if(a%2==0)
+        {
+            document.write("The no. is even<br>");
+        }
+        else
+        {
+            document.write("The no. is odd");
+        }
+        a=15;
+        if(a==10)
+        {
+            document.write("a is equal to 10");
+        }
+        else if(a==15)
+        {
+            document.write("a is equal to 15<br>");
+        }
+        else if(a==20)
+        {
+            document.write("a is equal to 20");
+        }
+        else{
+            document.write("a is not equal to 10 15 and 20 ");
+        }
+        var grade='C';
+        var result="";
+        switch(grade)
+        {
+            case 'A' :
+                result += "A Grade";
+                break;
+            case 'B' :
+                result += "B Grade";
+                break;
+            case 'C' :
+                result += "C Grade<br>";
+                break;
+            default :
+                result += "No Grades" 
+       }
+        document.write(result);
+    </script>
+</body>
+</html>

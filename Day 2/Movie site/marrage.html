@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matrimonial Match</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+
+        header {
+            background-color: #d9534f;
+            padding: 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            color: #fff;
+            font-size: 2em;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 40px;
+            background-image: url('https://via.placeholder.com/1200x400');
+            background-size: cover;
+            background-position: center;
+            color: #fff;
+        }
+
+        .hero h2 {
+            font-size: 2em;
+            margin-bottom: 15px;
+        }
+
+        .hero button {
+            padding: 10px 20px;
+            background-color: #fff;
+            border: none;
+            border-radius: 5px;
+            color: #d9534f;
+            cursor: pointer;
+        }
+
+        .profiles-section {
+            padding: 20px;
+        }
+
+        .profiles-section h3 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+            color: #d9534f;
+        }
+
+        .profiles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+        }
+
+        .profile-card {
+            background-color: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .profile-card img {
+            width: 100%;
+            border-bottom: 2px solid #d9534f;
+        }
+
+        .profile-card h4 {
+            padding: 10px;
+            font-size: 1.2em;
+        }
+
+        footer {
+            background-color: #d9534f;
+            text-align: center;
+            padding: 10px;
+            color: #fff;
+            margin-top: 20px;
+        }
+
+        footer p {
+            font-size: 0.8em;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Matrimonial Match</h1>
+    </header>
+
+    <section class="hero">
+        <h2>Find Your Perfect Match</h2>
+        <button>Get Started</button>
+    </section>
+
+    <section class="profiles-section">
+        <h3>Featured Profiles</h3>
+        <div class="profiles-grid">
+            <div class="profile-card">
+                <img src="https://via.placeholder.com/150x200" alt="Profile 1">
+                <h4>Profile Name 1</h4>
+            </div>
+            <div class="profile-card">
+                <img src="https://via.placeholder.com/150x200" alt="Profile 2">
+                <h4>Profile Name 2</h4>
+            </div>
+            <div class="profile-card">
+                <img src="https://via.placeholder.com/150x200" alt="Profile 3">
+                <h4>Profile Name 3</h4>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Matrimonial Match. All rights reserved.</p>
+    </footer>
+</body>
+</html>

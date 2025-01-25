@@ -1,0 +1,37 @@
+.container{
+    display: grid;
+    grid-template-columns: repeat(3,100px);
+    gap: 20px;
+} 
+.box{
+    height: 100px;
+    width: 100px;
+    border: 1px solid black;
+}
+#box1{
+        background-color: aqua;
+}
+#box2{
+        background-color: aqua;
+}
+#box3{
+        background-color: aqua;
+}
+#box4{
+        background-color: aqua;
+}
+#box5{
+        background-color: aqua;
+}
+#box6{
+        background-color: aqua;
+}
+#box7{
+        background-color: aqua;
+}
+#box8{
+        background-color: aqua;
+}
+#box9{
+        background-color: aqua;
+}

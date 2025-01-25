@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Function Demo</title>
+</head>
+<body>
+    <script>
+        function add(a,b)
+        {
+            document.write("Addition is : "+(a+b));
+            console.log("Addition is : "+(a+b));
+        }
+        function subtract(a,b)
+        {
+            document.write("Subtraction is : "+(a-b));
+            console.log("Subtraction is : "+(a-b));
+        }
+        function multiply(a,b)
+        {
+            document.write("Multiplication is : "+(a*b));
+            console.log("Multiplication is : "+(a*b));
+        }
+        function div(a,b)
+        {
+            document.write("Division is : "+(a/b));
+            console.log("Division is : "+(a/b));
+        }
+        add(5,4);
+        subtract(9,2);
+        multiply(4,6);
+        div(10,5);
+        function Reverse(a) 
+        {
+            let r = ""; 
+            for (let i = a.length - 1; i >= 0; i--) 
+            { 
+                r += a[i]; 
+            }
+            document.write(r);
+        }
+        Reverse("Om");
+        function palindrome(a) 
+        {
+            let r = ""; 
+            var temp=a;
+            for (let i = a.length - 1; i >= 0; i--) 
+            { 
+                r += a[i]; 
+            }
+            if(temp==r)
+            {
+                document.write("Its a palindrome");
+            }
+            else
+            {
+                document.write("Its not a palindrome");
+            }
+        }
+        palindrome("omo");
+    </script>
+</body>
+</html>

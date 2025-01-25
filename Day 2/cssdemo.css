@@ -1,0 +1,35 @@
+h2{
+    color: chartreuse;
+    background-color: darkslategrey;
+    padding: 10px;
+    border: 2px solid rgb(224, 244, 3);
+}
+p{
+    font-family: 'Times New Roman', Times, serif;
+    background-color: bisque;
+    padding: 10px;
+    width: 1000px;
+    height: 100px;
+    line-height: 50px bn;
+}
+.box{
+    width: 100px;
+    height: 100px;
+    text-align: center;
+    font-size: 10vh;
+    background-color: blueviolet;
+    border: 1px dotted black;
+    border-radius: 20px;
+}
+#box1{
+    background-color: brown;
+}
+#box2{
+    background-color: darkcyan;
+}
+#box3{
+    background-color: gold;
+}
+#box4{
+    background-color: hotpink;
+}

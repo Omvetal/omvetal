@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rock Paper Scissors</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #6a11cb, #2575fc);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      color: #fff;
+    }
+
+    .game-container {
+      background: #1e1e2f;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+      text-align: center;
+      width: 90%;
+      max-width: 600px;
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+    }
+
+    .scoreboard {
+      display: flex;
+      justify-content: space-around;
+      margin: 20px 0;
+      padding: 10px 0;
+      background: #292940;
+      border-radius: 10px;
+    }
+
+    .score {
+      font-size: 1.2rem;
+    }
+
+    .match-score-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin: 20px 0;
+    }
+
+    .score-button {
+      padding: 10px 20px;
+      background: #6a11cb;
+      border: none;
+      border-radius: 5px;
+      color: white;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .score-button:hover {
+      background: #2575fc;
+    }
+
+    .choices {
+      display: flex;
+      justify-content: space-around;
+      margin: 20px 0;
+    }
+
+    .choice {
+      background: transparent;
+      border: none;
+      outline: none;
+      cursor: pointer;
+      transition: transform 0.2s;
+      padding: 5px;
+    }
+
+    .choice:hover {
+      transform: scale(1.1);
+    }
+
+    .highlight-player {
+      border: 5px solid green;
+      border-radius: 10px;
+    }
+
+    .highlight-computer {
+      border: 5px solid red;
+      border-radius: 10px;
+    }
+
+    #result {
+      margin: 20px 0;
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      z-index: 10;
+      display: none;
+    }
+
+    .overlay img {
+      width: 200px;
+      margin-bottom: 20px;
+    }
+
+    .overlay button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background: #6a11cb;
+      border: none;
+      border-radius: 5px;
+      color: white;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .overlay button:hover {
+      background: #2575fc;
+    }
+
+    footer p {
+      font-size: 0.9rem;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="game-container">
+    <header>
+      <h1>Rock Paper Scissors</h1>
+    </header>
+
+    <main>
+      <div class="match-score-buttons">
+        <button class="score-button" data-score="3">3</button>
+        <button class="score-button" data-score="5">5</button>
+        <button class="score-button" id="customScore">Custom</button>
+      </div>
+
+      <div class="scoreboard">
+        <div class="score" id="playerScore">Player: 0</div>
+        <div class="score" id="computerScore">Computer: 0</div>
+      </div>
+
+      <div class="choices">
+        <button class="choice" id="rock">
+          <img src="rock.jpg" alt="Rock" style="border-radius: 60px; height: 150px; width: 150px;">
+        </button>
+        <button class="choice" id="paper">
+          <img src="paper.jpg" alt="Paper" style="border-radius: 60px; height: 150px; width: 150px;">
+        </button>
+        <button class="choice" id="scissors">
+          <img src="scissors.jpg" alt="Scissors" style="border-radius: 60px; height: 150px; width: 150px;">
+        </button>
+      </div>
+
+      <div id="result">Make your move!</div>
+    </main>
+
+    <footer>
+      <marquee><p>Designed by Om Vetal</p></marquee>
+    </footer>
+  </div>
+
+  <div class="overlay" id="gameOver">
+    <h1 id="finalMessage"></h1>
+    <button id="playAgain">Play Again</button>
+  </div>
+
+  <script>
+    let playerScore = 0;
+    let computerScore = 0;
+    let maxScore = 3;
+
+    const playerScoreDisplay = document.getElementById("playerScore");
+    const computerScoreDisplay = document.getElementById("computerScore");
+    const resultDisplay = document.getElementById("result");
+    const scoreButtons = document.querySelectorAll(".score-button");
+    const customScoreButton = document.getElementById("customScore");
+    const gameOverOverlay = document.getElementById("gameOver");
+    const resultGif = document.getElementById("resultGif");
+    const finalMessage = document.getElementById("finalMessage");
+    const playAgainButton = document.getElementById("playAgain");
+    const choices = document.querySelectorAll(".choice");
+
+    scoreButtons.forEach(button => {
+      button.addEventListener("click", () => {
+        maxScore = parseInt(button.getAttribute("data-score"));
+        resetGame();
+      });
+    });
+
+    customScoreButton.addEventListener("click", () => {
+      const customScore = parseInt(prompt("Enter custom match score:"));
+      if (customScore > 0) {
+        maxScore = customScore;
+        resetGame();
+      }
+    });
+
+    choices.forEach(choice => {
+      choice.addEventListener("click", () => {
+        const playerChoice = choice.id;
+        const computerChoice = getComputerChoice();
+        highlightChoices(playerChoice, computerChoice);
+        const result = playRound(playerChoice, computerChoice);
+        updateScores(result);
+        displayResult(result, playerChoice, computerChoice);
+        checkGameOver();
+      });
+    });
+
+    playAgainButton.addEventListener("click", resetGame);
+
+    function getComputerChoice() {
+      const choices = ["rock", "paper", "scissors"];
+      const randomIndex = Math.floor(Math.random() * 3);
+      return choices[randomIndex];
+    }
+
+    function highlightChoices(player, computer) {
+      choices.forEach(choice => choice.classList.remove("highlight-player", "highlight-computer"));
+      document.getElementById(player).classList.add("highlight-player");
+      document.getElementById(computer).classList.add("highlight-computer");
+    }
+
+    function playRound(player, computer) {
+      if (player === computer) {
+        return "tie";
+      }
+      if (
+        (player === "rock" && computer === "scissors") ||
+        (player === "paper" && computer === "rock") ||
+        (player === "scissors" && computer === "paper")
+      ) {
+        return "win";
+      }
+      return "lose";
+    }
+
+    function updateScores(result) {
+      if (result === "win") {
+        playerScore++;
+      } else if (result === "lose") {
+        computerScore++;
+      }
+
+      playerScoreDisplay.textContent = `Player: ${playerScore}`;
+      computerScoreDisplay.textContent = `Computer: ${computerScore}`;
+    }
+
+    function displayResult(result, playerChoice, computerChoice) {
+  const resultText = document.getElementById("result");
+  if (result === "tie") {
+    resultText.innerHTML = `It's a tie! You both chose ${playerChoice}. <br> <img src="tie.png" alt="You Win" style="height: 100px; margin-top: 10px;">`;
+  } else if (result === "win") {
+    resultText.innerHTML = `You win! ${playerChoice} beats ${computerChoice}. <br> <img src="win.gif" alt="You Win" style="height: 100px; margin-top: 10px;">`;
+  } else {
+    resultText.innerHTML = `You lose! ${computerChoice} beats ${playerChoice}. <br> <img src="loose.gif" alt="You Lose" style="height: 100px; margin-top: 10px;">`;
+  }
+}
+
+
+function checkGameOver() {
+  if (playerScore >= maxScore || computerScore >= maxScore) {
+    gameOverOverlay.style.display = "flex";
+
+    if (playerScore > computerScore) {
+      finalMessage.innerHTML = `
+        <p>Yeh You Win!</p>
+        <img src="win_result.gif" alt="You Win" style="height: 150px; margin-top: 10px;">
+      `;
+    } else {
+      finalMessage.innerHTML = `
+        <p>Oops You Lose!</p>
+        <img src="lose_result.png" alt="You Lose" style="height: 150px; margin-top: 10px;">
+      `;
+    }
+  }
+}
+
+
+    function resetGame() {
+      playerScore = 0;
+      computerScore = 0;
+      playerScoreDisplay.textContent = `Player: ${playerScore}`;
+      computerScoreDisplay.textContent = `Computer: ${computerScore}`;
+      resultDisplay.textContent = "Make your move!";
+      choices.forEach(choice => choice.classList.remove("highlight-player", "highlight-computer"));
+      gameOverOverlay.style.display = "none";
+    }
+  </script>
+</body>
+</html>
